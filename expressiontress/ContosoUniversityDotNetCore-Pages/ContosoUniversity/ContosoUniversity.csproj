@@ -2,16 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>ce51955c-ac46-4db7-a425-7af7336eb065</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Shared\_Layout.cshtml" />
-    <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
-    <Using Remove="Microsoft.Extensions.Configuration" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="automapper" Version="12.0.1" />
@@ -29,6 +22,14 @@
     </PackageReference>
     <PackageReference Include="miniprofiler.aspnetcore.mvc" Version="4.2.22" />
     <PackageReference Include="miniprofiler.entityframeworkcore" Version="4.2.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Shared\_Layout.cshtml" />
+    <None Include="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+    <Using Remove="Microsoft.Extensions.Configuration" />
+    <Folder Include="App_Data\" />
+    <InternalsVisibleTo Include="ContosoUniversity.IntegrationTests" />
   </ItemGroup>
 
 </Project>

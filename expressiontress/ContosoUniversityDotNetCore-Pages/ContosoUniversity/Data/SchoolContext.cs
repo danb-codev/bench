@@ -15,6 +15,10 @@ public class SchoolContext : DbContext
     public DbSet<OfficeAssignment> OfficeAssignments { get; set; }
     public DbSet<CourseAssignment> CourseAssignments { get; set; }
 
+    public SchoolContext(DbContextOptions<SchoolContext> options) : base(options) 
+    {
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Course>().ToTable("Course");

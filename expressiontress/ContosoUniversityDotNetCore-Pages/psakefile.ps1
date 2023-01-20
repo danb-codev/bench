@@ -20,7 +20,7 @@ task Info -description "Display runtime information" {
 
 task MigrateTest -description "Recreate the testing database" {
     # drop and recreate the test database
-    exec { dotnet grate `
+    exec { grate `
             -c "Server=(localdb)\mssqllocaldb;Database=ContosoUniversityDotNetCore-Pages-Test;Trusted_Connection=True;MultipleActiveResultSets=true" `
             -f ContosoUniversity/App_Data `
             --silent `
