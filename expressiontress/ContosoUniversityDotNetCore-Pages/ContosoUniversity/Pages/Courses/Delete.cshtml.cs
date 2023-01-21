@@ -50,9 +50,9 @@ public class Delete : PageModel
     public class QueryHandler : IRequestHandler<Query, Command>
     {
         private readonly SchoolContext _db;
-        private readonly AutoMapper.IConfigurationProvider _configuration;
+        private readonly IConfigurationProvider _configuration;
 
-        public QueryHandler(SchoolContext db, AutoMapper.IConfigurationProvider configuration)
+        public QueryHandler(SchoolContext db, IConfigurationProvider configuration)
         {
             _db = db;
             _configuration = configuration;
