@@ -7,7 +7,11 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 
 namespace ContosoUniversity.Pages.Courses;
 
@@ -60,7 +64,8 @@ public class Delete : PageModel
 
         public Task<Command> Handle(Query message, CancellationToken token) =>
             _db.Courses
-                .Where(c => c.Id == message.Id)
+                //.Where(c => c.Id == message.Id)
+                .FindRecord(message.Id)
                 .ProjectTo<Command>(_configuration)
                 .SingleOrDefaultAsync(token);
     }
@@ -90,5 +95,22 @@ public class Delete : PageModel
 
             return default;
         }
+    }
+}
+
+static class FilterExtensions
+{
+    public static IQueryable<TEntity> FindRecord<TEntity>(this IQueryable<TEntity> @this, int? id)
+    {
+        var entityType = typeof(TEntity);
+        var param = Expression.Parameter(entityType, "x");
+        var prop = Expression.PropertyOrField(param, "Id");
+        var constant = Expression.Constant(id, typeof(int));
+        var findLambda = Expression.Lambda<Func<TEntity, bool>>(
+                Expression.Equal(prop, constant),
+                new[] { param }
+            );
+
+        return @this.Where(findLambda);
     }
 }

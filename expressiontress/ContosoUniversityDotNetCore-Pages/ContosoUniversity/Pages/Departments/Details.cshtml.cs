@@ -56,8 +56,7 @@ public class Details : PageModel
             _configuration = configuration;
         }
 
-        public Task<Model> Handle(Query message,
-            CancellationToken token) =>
+        public Task<Model> Handle(Query message, CancellationToken token) =>
             _context.Departments
                 .Where(m => m.Id == message.Id)
                 .ProjectTo<Model>(_configuration)

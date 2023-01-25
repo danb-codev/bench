@@ -70,10 +70,11 @@ public class Index : PageModel
             var searchString = message.SearchString ?? message.CurrentFilter;
 
             IQueryable<Student> students = _db.Students;
+            
             if (!string.IsNullOrEmpty(searchString))
             {
                 students = students.Where(s => s.LastName.Contains(searchString)
-                                               || s.FirstMidName.Contains(searchString));
+                                            || s.FirstMidName.Contains(searchString));
             }
 
             students = message.SortOrder switch
