@@ -1,0 +1,23 @@
+﻿@hostname = localhost
+@port = 7000
+@host = {{hostname}}:{{port}}
+@base = https://{{host}}
+@contentType = application/json
+
+GET {{base}}/books
+
+###
+
+GET {{base}}/books/63ec7b806344b0eddffa5351
+
+###
+
+POST {{base}}/books
+Content-Type:{{contentType}}
+
+{
+    "Name": "Test",
+    "Price": 100.10,
+    "Category": "Test Category",
+    "Author": "Test Author"
+}
